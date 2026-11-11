@@ -1,84 +1,88 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="he" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="DevPulse - Modern Developer Dashboard, Kanban Board, Focus Timer, and Utility Playground">
-  <title>DevPulse — Modern Developer Hub</title>
+  <meta name="description" content="DevPulse - מרכז פיתוח מודרני, לוח משימות קנבן, טיימר פומודורו וארגז כלי עזר למפתחים">
+  <title>DevPulse — מרכז הפיתוח והפרודוקטיביות</title>
+  <!-- Google Fonts: Rubik -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2226%22 font-size=%2224%22>⚡</text></svg>">
 </head>
 <body>
   <div class="app-layout">
-    <!-- Sidebar / Navigation -->
+    <!-- Sidebar / סרגל צד -->
     <aside class="sidebar">
       <div class="sidebar-brand">
         <div class="brand-icon">⚡</div>
         <div class="brand-text">
           <span class="brand-title">DevPulse</span>
-          <span class="brand-badge">v1.0</span>
+          <span class="brand-badge">גרסה 1.0</span>
         </div>
       </div>
 
       <nav class="sidebar-nav">
         <button class="nav-item active" data-tab="dashboard">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-          <span>Dashboard</span>
+          <span>לוח בקרה</span>
         </button>
         <button class="nav-item" data-tab="kanban">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4v16H4zm6 0h4v10h-4zm6 0h4v6h-4z"/></svg>
-          <span>Task Board</span>
+          <span>לוח משימות</span>
           <span class="nav-counter" id="totalTasksCount">0</span>
         </button>
         <button class="nav-item" data-tab="pomodoro">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>Focus Timer</span>
+          <span>טיימר ריכוז</span>
         </button>
         <button class="nav-item" data-tab="tools">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          <span>Dev Toolbox</span>
+          <span>ארגז כלים</span>
         </button>
         <button class="nav-item" data-tab="projects">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          <span>Projects</span>
+          <span>פרויקטים</span>
         </button>
       </nav>
 
       <div class="sidebar-footer">
-        <button class="sidebar-theme-btn" id="sidebarThemeToggle" title="Switch between Dark and Bright theme">
+        <button class="sidebar-theme-btn" id="sidebarThemeToggle" title="החלף בין מצב כהה למצב בהיר">
           <span class="sidebar-theme-icon" id="sidebarThemeIcon">☀️</span>
-          <span class="sidebar-theme-text" id="sidebarThemeText">Bright Mode</span>
-          <span class="sidebar-theme-pill">Toggle</span>
+          <span class="sidebar-theme-text" id="sidebarThemeText">מצב בהיר</span>
+          <span class="sidebar-theme-pill">החלף</span>
         </button>
         <div class="user-pill">
           <div class="avatar">👨‍💻</div>
           <div class="user-info">
-            <span class="user-name">Guest Developer</span>
-            <span class="user-role">Online · Local Storage</span>
+            <span class="user-name">מפתח אורח</span>
+            <span class="user-role">מחובר · אחסון מקומי</span>
           </div>
         </div>
       </div>
     </aside>
 
-    <!-- Main Content Region -->
+    <!-- Main Content Region / תוכן מרכזי -->
     <div class="main-wrapper">
-      <!-- Top Header -->
+      <!-- Top Header / כותרת עליונה -->
       <header class="top-header">
         <div class="header-left">
-          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="פתח/סגור תפריט צד">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
           <div class="current-page-info">
-            <h1 class="page-heading" id="pageHeading">Dashboard</h1>
-            <p class="page-subheading" id="pageSubheading">System overview and productivity metrics</p>
+            <h1 class="page-heading" id="pageHeading">לוח בקרה</h1>
+            <p class="page-subheading" id="pageSubheading">סקירת מערכת ומדדי פרודוקטיביות</p>
           </div>
         </div>
 
         <div class="header-right">
-          <div class="live-clock" id="liveClock">00:00:00 PM</div>
-          <button class="theme-toggle-btn" id="themeToggle" title="Switch between Dark and Bright mode">
+          <div class="live-clock" id="liveClock" dir="ltr">00:00:00 PM</div>
+          <button class="theme-toggle-btn" id="themeToggle" title="החלף בין מצב כהה למצב בהיר">
             <span class="theme-toggle-icon" id="themeToggleIcon">☀️</span>
-            <span class="theme-toggle-label" id="themeToggleLabel">Bright Mode</span>
+            <span class="theme-toggle-label" id="themeToggleLabel">מצב בהיר</span>
           </button>
           <a href="https://github.com/rachel400-git/my-webapp-test" target="_blank" rel="noopener noreferrer" class="btn btn-secondary gh-btn" id="repoLinkBtn">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -87,59 +91,59 @@
         </div>
       </header>
 
-      <!-- Content Views -->
+      <!-- Content Views / תצוגות תוכן -->
       <main class="content-container">
-        <!-- TAB 1: DASHBOARD -->
+        <!-- TAB 1: DASHBOARD / לוח בקרה -->
         <section class="tab-pane active" id="tab-dashboard">
-          <!-- Stat Grid -->
+          <!-- Stat Grid / כרטיסי מדדים -->
           <div class="metrics-grid">
             <div class="metric-card">
               <div class="metric-header">
-                <span class="metric-title">Completed Tasks</span>
+                <span class="metric-title">משימות שהושלמו</span>
                 <span class="metric-badge green">+12%</span>
               </div>
               <div class="metric-value" id="statCompletedTasks">0</div>
-              <div class="metric-footer">Across all Kanban columns</div>
+              <div class="metric-footer">בכל עמודות הקנבן</div>
             </div>
 
             <div class="metric-card">
               <div class="metric-header">
-                <span class="metric-title">Focus Time</span>
-                <span class="metric-badge purple">Today</span>
+                <span class="metric-title">זמן ריכוז</span>
+                <span class="metric-badge purple">היום</span>
               </div>
-              <div class="metric-value" id="statFocusTime">0m</div>
-              <div class="metric-footer" id="statSessionsDone">0 completed pomodoros</div>
+              <div class="metric-value" id="statFocusTime">0 שעות</div>
+              <div class="metric-footer" id="statSessionsDone">0 סבבי פומודורו שהושלמו</div>
             </div>
 
             <div class="metric-card">
               <div class="metric-header">
-                <span class="metric-title">Productivity Streak</span>
-                <span class="metric-badge orange">Active 🔥</span>
+                <span class="metric-title">רצף פרודוקטיביות</span>
+                <span class="metric-badge orange">פעיל 🔥</span>
               </div>
-              <div class="metric-value" id="statStreak">5 Days</div>
-              <div class="metric-footer">Personal best: 14 days</div>
+              <div class="metric-value" id="statStreak">5 ימים</div>
+              <div class="metric-footer">שיא אישי: 14 ימים</div>
             </div>
 
             <div class="metric-card">
               <div class="metric-header">
-                <span class="metric-title">Status</span>
+                <span class="metric-title">סטטוס פריסה</span>
                 <span class="metric-badge blue">GitHub Pages</span>
               </div>
-              <div class="metric-value">Live 🚀</div>
-              <div class="metric-footer">Static client-side app</div>
+              <div class="metric-value">באוויר 🚀</div>
+              <div class="metric-footer">אפליקציית צד-לקוח סטטית</div>
             </div>
           </div>
 
-          <!-- Chart & Quick Feed -->
+          <!-- Chart & Daily Inspiration / גרף והשראה יומית -->
           <div class="dashboard-grid">
             <div class="card chart-card">
               <div class="card-header">
                 <div>
-                  <h3 class="card-title">Weekly Focus & Activity</h3>
-                  <p class="card-subtitle">Hours spent in focus sessions this week</p>
+                  <h3 class="card-title">מיקוד ופעילות שבועית</h3>
+                  <p class="card-subtitle">שעות עבודה ממוקדות במהלך השבוע החולף</p>
                 </div>
                 <div class="chart-legend">
-                  <span class="legend-dot focus"></span> Focus Hours
+                  <span class="legend-dot focus"></span> שעות ריכוז
                 </div>
               </div>
               <div class="chart-wrapper">
@@ -149,70 +153,70 @@
 
             <div class="card quote-card">
               <div class="card-header">
-                <h3 class="card-title">Daily Inspiration</h3>
-                <button class="icon-btn-small" id="newQuoteBtn" title="Get another quote">🔄</button>
+                <h3 class="card-title">השראה יומית</h3>
+                <button class="icon-btn-small" id="newQuoteBtn" title="ציטוט נוסף">🔄</button>
               </div>
               <div class="quote-content">
-                <blockquote id="quoteText">"First, solve the problem. Then, write the code."</blockquote>
-                <cite id="quoteAuthor">— John Johnson</cite>
+                <blockquote id="quoteText">"קודם פתור את הבעיה. לאחר מכן, כתוב את הקוד."</blockquote>
+                <cite id="quoteAuthor">— ג'ון ג'ונסון</cite>
               </div>
               <div class="quote-tags">
-                <span class="tag">#programming</span>
-                <span class="tag">#clean-code</span>
-                <span class="tag">#focus</span>
+                <span class="tag">#תכנות</span>
+                <span class="tag">#קוד_נקי</span>
+                <span class="tag">#מיקוד</span>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- TAB 2: KANBAN BOARD -->
+        <!-- TAB 2: KANBAN BOARD / לוח משימות -->
         <section class="tab-pane" id="tab-kanban">
           <div class="kanban-toolbar">
             <div class="toolbar-left">
-              <input type="text" id="taskSearchInput" class="form-input search-input" placeholder="Search tasks...">
+              <input type="text" id="taskSearchInput" class="form-input search-input" placeholder="חיפוש משימות לפי כותרת או תיאור...">
               <select id="priorityFilter" class="form-select">
-                <option value="all">All Priorities</option>
-                <option value="high">High Priority</option>
-                <option value="medium">Medium Priority</option>
-                <option value="low">Low Priority</option>
+                <option value="all">כל רמות העדיפות</option>
+                <option value="high">עדיפות גבוהה 🔥</option>
+                <option value="medium">עדיפות בינונית</option>
+                <option value="low">עדיפות נמוכה</option>
               </select>
             </div>
             <button class="btn btn-primary" id="openAddTaskModalBtn">
-              <span>+ Add New Task</span>
+              <span>+ משימה חדשה</span>
             </button>
           </div>
 
           <div class="kanban-board">
-            <!-- Todo Column -->
+            <!-- עמודת לביצוע -->
             <div class="kanban-column" data-column="todo">
               <div class="column-header">
                 <div class="column-title">
                   <span class="status-indicator todo"></span>
-                  <span>To Do</span>
+                  <span>לביצוע</span>
                   <span class="column-badge" id="todoCount">0</span>
                 </div>
               </div>
               <div class="task-list" id="todoList" data-status="todo"></div>
             </div>
 
-            <!-- In Progress Column -->
+            <!-- עמודת בתהליך -->
             <div class="kanban-column" data-column="in-progress">
               <div class="column-header">
                 <div class="column-title">
                   <span class="status-indicator in-progress"></span>
-                  <span>In Progress</span>
+                  <span>בתהליך</span>
                   <span class="column-badge" id="inProgressCount">0</span>
                 </div>
               </div>
               <div class="task-list" id="inProgressList" data-status="in-progress"></div>
             </div>
 
-            <!-- Done Column -->
+            <!-- עמודת הושלם -->
             <div class="kanban-column" data-column="done">
               <div class="column-header">
                 <div class="column-title">
                   <span class="status-indicator done"></span>
-                  <span>Done</span>
+                  <span>הושלם</span>
                   <span class="column-badge" id="doneCount">0</span>
                 </div>
               </div>
@@ -221,13 +225,13 @@
           </div>
         </section>
 
-        <!-- TAB 3: POMODORO TIMER -->
+        <!-- TAB 3: POMODORO TIMER / טיימר פומודורו -->
         <section class="tab-pane" id="tab-pomodoro">
           <div class="timer-container">
             <div class="timer-modes">
-              <button class="timer-mode-btn active" data-mode="pomodoro" data-time="25">Focus (25m)</button>
-              <button class="timer-mode-btn" data-mode="shortBreak" data-time="5">Short Break (5m)</button>
-              <button class="timer-mode-btn" data-mode="longBreak" data-time="15">Long Break (15m)</button>
+              <button class="timer-mode-btn active" data-mode="pomodoro" data-time="25">ריכוז (25 דק׳)</button>
+              <button class="timer-mode-btn" data-mode="shortBreak" data-time="5">הפסקה קצרה (5 דק׳)</button>
+              <button class="timer-mode-btn" data-mode="longBreak" data-time="15">הפסקה ארוכה (15 דק׳)</button>
             </div>
 
             <div class="timer-display-wrapper">
@@ -236,28 +240,28 @@
                 <circle class="progress-ring-fill" id="timerProgressFill" cx="130" cy="130" r="110"/>
               </svg>
               <div class="timer-center-info">
-                <span class="timer-countdown" id="timerCountdown">25:00</span>
-                <span class="timer-label" id="timerLabel">Stay focused</span>
+                <span class="timer-countdown" id="timerCountdown" dir="ltr">25:00</span>
+                <span class="timer-label" id="timerLabel">הישאר ממוקד</span>
               </div>
             </div>
 
             <div class="timer-controls">
-              <button class="btn btn-secondary timer-btn" id="resetTimerBtn">Reset</button>
-              <button class="btn btn-primary timer-btn-large" id="toggleTimerBtn">Start Focus</button>
-              <button class="btn btn-secondary timer-btn" id="skipTimerBtn">Skip</button>
+              <button class="btn btn-secondary timer-btn" id="resetTimerBtn">איפוס</button>
+              <button class="btn btn-primary timer-btn-large" id="toggleTimerBtn">הפעל ריכוז</button>
+              <button class="btn btn-secondary timer-btn" id="skipTimerBtn">דלג</button>
             </div>
 
             <div class="timer-settings-card">
-              <h4>Audio & Sound Settings</h4>
+              <h4>הגדרות שמע והתראות</h4>
               <div class="settings-row">
-                <span>Sound Chime Alert</span>
+                <span>צליל התראה מלודי בסיום</span>
                 <label class="switch">
                   <input type="checkbox" id="soundToggle" checked>
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="settings-row">
-                <span>Auto-start Next Session</span>
+                <span>הפעלה אוטומטית של הסבב הבא</span>
                 <label class="switch">
                   <input type="checkbox" id="autoStartToggle">
                   <span class="slider round"></span>
@@ -267,56 +271,56 @@
           </div>
         </section>
 
-        <!-- TAB 4: DEVELOPER TOOLBOX -->
+        <!-- TAB 4: DEVELOPER TOOLBOX / ארגז כלים למפתחים -->
         <section class="tab-pane" id="tab-tools">
           <div class="tools-grid">
-            <!-- Tool 1: JSON Formatter & Validator -->
+            <!-- כלי 1: JSON Formatter & Validator -->
             <div class="card tool-card">
               <div class="card-header">
                 <div>
-                  <h3 class="card-title">JSON Formatter & Validator</h3>
-                  <p class="card-subtitle">Format, beautify, minify, and validate JSON data</p>
+                  <h3 class="card-title">מעצב ומאמת JSON</h3>
+                  <p class="card-subtitle">עיצוב, ייפוי, דחיסה ובדיקת תקינות תחביר של אובייקטי JSON</p>
                 </div>
                 <div class="tool-actions">
-                  <button class="btn btn-small btn-secondary" id="formatJsonBtn">Beautify</button>
-                  <button class="btn btn-small btn-secondary" id="minifyJsonBtn">Minify</button>
-                  <button class="btn btn-small btn-secondary" id="sampleJsonBtn">Sample</button>
+                  <button class="btn btn-small btn-secondary" id="formatJsonBtn">עצב (ייפוי)</button>
+                  <button class="btn btn-small btn-secondary" id="minifyJsonBtn">דחוס</button>
+                  <button class="btn btn-small btn-secondary" id="sampleJsonBtn">טען דוגמה</button>
                 </div>
               </div>
               <div class="tool-body">
-                <textarea id="jsonInput" class="code-area" placeholder="Paste or type JSON here..."></textarea>
-                <div class="tool-feedback" id="jsonFeedback">Status: Ready</div>
+                <textarea id="jsonInput" class="code-area ltr-box" placeholder="הדבק או הקלד JSON כאן..." dir="ltr"></textarea>
+                <div class="tool-feedback" id="jsonFeedback">סטטוס: מוכן לעבודה</div>
               </div>
             </div>
 
-            <!-- Tool 2: Base64 Encoder / Decoder -->
+            <!-- כלי 2: Base64 Encoder / Decoder -->
             <div class="card tool-card">
               <div class="card-header">
                 <div>
-                  <h3 class="card-title">Base64 Encoder / Decoder</h3>
-                  <p class="card-subtitle">Convert strings to Base64 and back</p>
+                  <h3 class="card-title">מקודד ומפענח Base64</h3>
+                  <p class="card-subtitle">המרת מחרוזות טקסט (כולל עברית UTF-8) ל-Base64 וחזרה</p>
                 </div>
                 <div class="tool-actions">
-                  <button class="btn btn-small btn-secondary" id="encodeBase64Btn">Encode</button>
-                  <button class="btn btn-small btn-secondary" id="decodeBase64Btn">Decode</button>
-                  <button class="btn btn-small btn-secondary" id="clearBase64Btn">Clear</button>
+                  <button class="btn btn-small btn-secondary" id="encodeBase64Btn">קודד (Encode)</button>
+                  <button class="btn btn-small btn-secondary" id="decodeBase64Btn">פענח (Decode)</button>
+                  <button class="btn btn-small btn-secondary" id="clearBase64Btn">נקה</button>
                 </div>
               </div>
               <div class="tool-body">
-                <textarea id="base64Input" class="code-area" placeholder="Enter text to encode or Base64 to decode..."></textarea>
-                <div class="tool-feedback" id="base64Feedback">Status: Ready</div>
+                <textarea id="base64Input" class="code-area ltr-box" placeholder="הזן טקסט לקידוד או מחרוזת Base64 לפענוח..." dir="ltr"></textarea>
+                <div class="tool-feedback" id="base64Feedback">סטטוס: מוכן לעבודה</div>
               </div>
             </div>
 
-            <!-- Tool 3: UUID & String Utilities -->
+            <!-- כלי 3: UUID v4 Generator -->
             <div class="card tool-card">
               <div class="card-header">
                 <div>
-                  <h3 class="card-title">UUID v4 & Hash Generator</h3>
-                  <p class="card-subtitle">Generate secure random UUIDs and hashes</p>
+                  <h3 class="card-title">מחולל מזהי UUID v4</h3>
+                  <p class="card-subtitle">יצירת מזהים רנדומליים תקניים ומאובטחים בלחיצה אחת</p>
                 </div>
                 <div class="tool-actions">
-                  <button class="btn btn-small btn-primary" id="generateUuidBtn">Generate UUIDs</button>
+                  <button class="btn btn-small btn-primary" id="generateUuidBtn">צור מזהים חדשים</button>
                 </div>
               </div>
               <div class="tool-body">
@@ -324,38 +328,38 @@
               </div>
             </div>
 
-            <!-- Tool 4: URL Encoder / Decoder -->
+            <!-- כלי 4: URL Encoder / Decoder -->
             <div class="card tool-card">
               <div class="card-header">
                 <div>
-                  <h3 class="card-title">URL Encoder / Decoder</h3>
-                  <p class="card-subtitle">Safely encode URI components and parse queries</p>
+                  <h3 class="card-title">מקודד ומפענח כתובות URL</h3>
+                  <p class="card-subtitle">קידוד ופענוח בטוח של רכיבי כתובת אינטרנט ושאילתות (Query Params)</p>
                 </div>
                 <div class="tool-actions">
-                  <button class="btn btn-small btn-secondary" id="urlEncodeBtn">Encode</button>
-                  <button class="btn btn-small btn-secondary" id="urlDecodeBtn">Decode</button>
+                  <button class="btn btn-small btn-secondary" id="urlEncodeBtn">קודד (Encode)</button>
+                  <button class="btn btn-small btn-secondary" id="urlDecodeBtn">פענח (Decode)</button>
                 </div>
               </div>
               <div class="tool-body">
-                <textarea id="urlInput" class="code-area" placeholder="Enter URL or URI component..."></textarea>
-                <div class="tool-feedback" id="urlFeedback">Status: Ready</div>
+                <textarea id="urlInput" class="code-area ltr-box" placeholder="הזן כתובת אינטרנט (URL) או פרמטרים לקידוד..." dir="ltr"></textarea>
+                <div class="tool-feedback" id="urlFeedback">סטטוס: מוכן לעבודה</div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- TAB 5: PROJECTS SHOWCASE -->
+        <!-- TAB 5: PROJECTS SHOWCASE / גלריית פרויקטים -->
         <section class="tab-pane" id="tab-projects">
           <div class="projects-intro">
             <div>
-              <h3>Featured Projects</h3>
-              <p>Showcase of web applications, tools, and prototypes</p>
+              <h3>פרויקטים נבחרים</h3>
+              <p>גלריית אפליקציות רשת, כלי פיתוח ואבות-טיפוס</p>
             </div>
             <div class="filter-pills" id="projectFilterPills">
-              <button class="filter-pill active" data-filter="all">All</button>
-              <button class="filter-pill" data-filter="web">Web Apps</button>
-              <button class="filter-pill" data-filter="tool">Dev Tools</button>
-              <button class="filter-pill" data-filter="demo">Demos</button>
+              <button class="filter-pill active" data-filter="all">הכל</button>
+              <button class="filter-pill" data-filter="web">אפליקציות רשת</button>
+              <button class="filter-pill" data-filter="tool">כלי פיתוח</button>
+              <button class="filter-pill" data-filter="demo">דמואים</button>
             </div>
           </div>
 
@@ -365,46 +369,46 @@
     </div>
   </div>
 
-  <!-- Task Modal -->
+  <!-- Task Modal / חלונית מודאל למשימה -->
   <div class="modal-overlay" id="taskModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modalTitle">Create New Task</h3>
-        <button class="modal-close" id="closeModalBtn">&times;</button>
+        <h3 id="modalTitle">יצירת משימה חדשה</h3>
+        <button class="modal-close" id="closeModalBtn" aria-label="סגור">&times;</button>
       </div>
       <form id="taskForm">
         <input type="hidden" id="taskId">
         <div class="form-group">
-          <label for="taskTitleInput">Task Title *</label>
-          <input type="text" id="taskTitleInput" class="form-input" placeholder="e.g. Deploy site to GitHub Pages" required>
+          <label for="taskTitleInput">כותרת המשימה *</label>
+          <input type="text" id="taskTitleInput" class="form-input" placeholder="למשל: בדיקה מקומית של האפליקציה" required>
         </div>
         <div class="form-group">
-          <label for="taskDescInput">Description</label>
-          <textarea id="taskDescInput" class="form-input" rows="3" placeholder="Brief details about what needs to be done..."></textarea>
+          <label for="taskDescInput">תיאור ופרטים נוספים</label>
+          <textarea id="taskDescInput" class="form-input" rows="3" placeholder="פירוט קצר על מה שנדרש לבצע..."></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="taskPriorityInput">Priority</label>
+            <label for="taskPriorityInput">רמת עדיפות</label>
             <select id="taskPriorityInput" class="form-select">
-              <option value="low">Low</option>
-              <option value="medium" selected>Medium</option>
-              <option value="high">High 🔥</option>
+              <option value="low">עדיפות נמוכה</option>
+              <option value="medium" selected>עדיפות בינונית</option>
+              <option value="high">עדיפות גבוהה 🔥</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="taskCategoryInput">Category / Tag</label>
-            <input type="text" id="taskCategoryInput" class="form-input" placeholder="e.g. DevOps, UI, Feature">
+            <label for="taskCategoryInput">תגית / קטגוריה</label>
+            <input type="text" id="taskCategoryInput" class="form-input" placeholder="למשל: DevOps, ממשק משתמש, תכונה">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
-          <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+          <button type="button" class="btn btn-secondary" id="cancelModalBtn">ביטול</button>
+          <button type="submit" class="btn btn-primary" id="saveTaskBtn">שמור משימה</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
+  <!-- Toast Notification Container / מיכל התראות קופצות -->
   <div class="toast-container" id="toastContainer"></div>
 
   <script src="app.js"></script>

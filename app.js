@@ -1,47 +1,56 @@
 /**
- * DevPulse - Main Application Logic
- * Pure Vanilla JavaScript (ES6+), Zero Dependencies, Fully Offline Capable
+ * DevPulse - לוגיקת האפליקציה הראשית (עברית & RTL מלא)
+ * Vanilla JavaScript (ES6+), ללא ספריות חיצוניות, תמיכה מלאה באופליין
  */
 
 (function () {
   'use strict';
 
-  // State Management
+  // ניהול מצב האפליקציה (State)
   const STATE = {
     theme: localStorage.getItem('devpulse_theme') || 'dark',
     activeTab: 'dashboard',
-    tasks: JSON.parse(localStorage.getItem('devpulse_tasks')) || [
+    // משימות ברירת מחדל בעברית
+    tasks: JSON.parse(localStorage.getItem('devpulse_tasks_v2')) || [
       {
         id: 'task-1',
-        title: 'Launch DevPulse on GitHub Pages',
-        desc: 'Commit repository, push to GitHub, and enable Pages in repo settings.',
+        title: 'בדיקת האפליקציה בסביבה מקומית',
+        desc: 'בדיקת תצוגה מקדימה, מעבר בין לשוניות ואימות תקינות RTL.',
         status: 'in-progress',
+        priority: 'high',
+        tag: 'בדיקות'
+      },
+      {
+        id: 'task-2',
+        title: 'פריסת DevPulse ב-GitHub Pages',
+        desc: 'דחיפת השינויים לגיטהאב לאחר אישור הבדיקה המקומית.',
+        status: 'todo',
         priority: 'high',
         tag: 'DevOps'
       },
       {
-        id: 'task-2',
-        title: 'Explore Dev Toolbox Utilities',
-        desc: 'Test JSON validator, Base64 encoder, and UUID generator.',
+        id: 'task-3',
+        title: 'בדיקת כלי הפיתוח בארגז הכלים',
+        desc: 'בדיקת מעצב ה-JSON, מקודד Base64 ומחולל ה-UUID.',
         status: 'todo',
         priority: 'medium',
-        tag: 'Feature'
-      },
-      {
-        id: 'task-3',
-        title: 'Complete 25-minute Deep Work Sprint',
-        desc: 'Use the built-in Pomodoro timer to focus on a programming session.',
-        status: 'todo',
-        priority: 'low',
-        tag: 'Productivity'
+        tag: 'ארגז כלים'
       },
       {
         id: 'task-4',
-        title: 'Project architecture setup',
-        desc: 'HTML5, CSS Custom Properties, and Vanilla JavaScript structure completed.',
+        title: 'סשן עבודה ממוקד של 25 דקות',
+        desc: 'שימוש בטיימר הפומודורו המובנה עם צליל התראה מלודי.',
+        status: 'todo',
+        priority: 'low',
+        tag: 'פרודוקטיביות'
+      },
+      {
+        id: 'task-5',
+        title: 'המרת הממשק לעברית מלאה (RTL)',
+        desc: 'תרגום מלא של כל הרכיבים, התאמת עיצוב ימין-שמאל ופונט רוביק.',
         status: 'done',
         priority: 'high',
-        tag: 'Setup'
+        tag: 'עיצוב'
       }
     ],
     timer: {
@@ -60,32 +69,32 @@
     },
     projects: [
       {
-        title: 'DevPulse Hub',
-        desc: 'Developer dashboard with Pomodoro timer, Kanban board, and utilities playground.',
+        title: 'מרכז המפתחים DevPulse',
+        desc: 'לוח בקרה אינטראקטיבי למפתחים עם טיימר פומודורו, לוח משימות קנבן וארגז כלים.',
         type: 'web',
         icon: '⚡',
         tech: ['Vanilla JS', 'CSS Grid', 'GitHub Pages'],
         demoUrl: '#'
       },
       {
-        title: 'Cloud Canvas API',
-        desc: 'High performance real-time image processing microservice built with WebAssembly.',
+        title: 'מנוע עיבוד תמונה CloudCanvas',
+        desc: 'מיקרו-שירות מהיר לעיבוד תמונה בזמן אמת המבוסס על WebAssembly.',
         type: 'tool',
         icon: '🎨',
         tech: ['Rust', 'Wasm', 'TypeScript'],
         demoUrl: '#'
       },
       {
-        title: 'SyntaxFlow Studio',
-        desc: 'Modern browser-based code snippet animator and social preview generator.',
+        title: 'סטודיו SyntaxFlow',
+        desc: 'סטודיו מתקדם בדפדפן ליצירת אנימציות של קטעי קוד ותצוגה מקדימה שיתופית.',
         type: 'web',
         icon: '✨',
         tech: ['WebAudio', 'Canvas', 'HTML5'],
         demoUrl: '#'
       },
       {
-        title: 'NanoStore DB',
-        desc: 'Ultra-lightweight embedded key-value document store with zero external dependencies.',
+        title: 'מסד נתונים NanoStore DB',
+        desc: 'מסד נתונים קל-משקל ומהיר בזיכרון המקומי ללא תלויות חיצוניות כלל.',
         type: 'demo',
         icon: '📦',
         tech: ['JavaScript', 'JSON', 'IndexedDB'],
@@ -93,18 +102,18 @@
       }
     ],
     quotes: [
-      { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
-      { text: "Simplicity is prerequisite for reliability.", author: "Edsger W. Dijkstra" },
-      { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
-      { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },
-      { text: "Clean code always looks like it was written by someone who cares.", author: "Michael Feathers" },
-      { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", author: "Martin Fowler" }
+      { text: "קודם כל פתור את הבעיה. רק לאחר מכן, כתוב את הקוד.", author: "ג'ון ג'ונסון" },
+      { text: "פשטות היא תנאי מוקדם והכרחי לאמינות.", author: "אדסחר דייקסטרה" },
+      { text: "גרום לזה לעבוד, גרום לזה להיות נכון, גרום לזה להיות מהיר.", author: "קנט בק" },
+      { text: "קוד הוא כמו הומור. אם צריך להסביר אותו, הוא כנראה לא טוב.", author: "קורי האוס" },
+      { text: "קוד נקי תמיד נראה כאילו נכתב על ידי מישהו שאכפת לו.", author: "מייקל פת'רס" },
+      { text: "כל טיפש יכול לכתוב קוד שמחשב מבין. מתכנתים טובים כותבים קוד שבני אדם מבינים.", author: "מרטין פאולר" }
     ]
   };
 
-  // DOM Elements
+  // רכיבי DOM
   const DOM = {
-    // Nav
+    // ניווט ותפריטים
     navButtons: document.querySelectorAll('.nav-item'),
     tabPanes: document.querySelectorAll('.tab-pane'),
     pageHeading: document.getElementById('pageHeading'),
@@ -114,7 +123,7 @@
     liveClock: document.getElementById('liveClock'),
     themeToggle: document.getElementById('themeToggle'),
 
-    // Dashboard
+    // לוח בקרה ומדדים
     statCompletedTasks: document.getElementById('statCompletedTasks'),
     statFocusTime: document.getElementById('statFocusTime'),
     statSessionsDone: document.getElementById('statSessionsDone'),
@@ -125,7 +134,7 @@
     newQuoteBtn: document.getElementById('newQuoteBtn'),
     productivityChart: document.getElementById('productivityChart'),
 
-    // Kanban
+    // קנבן (משימות)
     todoList: document.getElementById('todoList'),
     inProgressList: document.getElementById('inProgressList'),
     doneList: document.getElementById('doneList'),
@@ -136,7 +145,7 @@
     taskSearchInput: document.getElementById('taskSearchInput'),
     priorityFilter: document.getElementById('priorityFilter'),
 
-    // Modal
+    // מודאל יצירת/עריכת משימה
     taskModal: document.getElementById('taskModal'),
     closeModalBtn: document.getElementById('closeModalBtn'),
     cancelModalBtn: document.getElementById('cancelModalBtn'),
@@ -148,7 +157,7 @@
     taskPriorityInput: document.getElementById('taskPriorityInput'),
     taskCategoryInput: document.getElementById('taskCategoryInput'),
 
-    // Pomodoro
+    // פומודורו (טיימר)
     timerModes: document.querySelectorAll('.timer-mode-btn'),
     timerProgressFill: document.getElementById('timerProgressFill'),
     timerCountdown: document.getElementById('timerCountdown'),
@@ -159,7 +168,7 @@
     soundToggle: document.getElementById('soundToggle'),
     autoStartToggle: document.getElementById('autoStartToggle'),
 
-    // Toolbox
+    // ארגז כלים
     jsonInput: document.getElementById('jsonInput'),
     jsonFeedback: document.getElementById('jsonFeedback'),
     formatJsonBtn: document.getElementById('formatJsonBtn'),
@@ -180,16 +189,16 @@
     urlEncodeBtn: document.getElementById('urlEncodeBtn'),
     urlDecodeBtn: document.getElementById('urlDecodeBtn'),
 
-    // Projects
+    // פרויקטים
     projectsGrid: document.getElementById('projectsGrid'),
     projectFilterPills: document.getElementById('projectFilterPills'),
 
-    // Toast
+    // התראות קופצות (Toasts)
     toastContainer: document.getElementById('toastContainer')
   };
 
   /* ========================================================
-     Notification / Toast System
+     מערכת התראות קופצות (Toasts)
      ======================================================== */
   function showToast(message, type = 'info') {
     const toast = document.createElement('div');
@@ -207,13 +216,13 @@
   }
 
   /* ========================================================
-     Theme System
+     מערכת החלפת ערכות נושא (כהה / בהיר)
      ======================================================== */
   function updateThemeUI(theme) {
     const isBright = theme === 'light';
-    const nextThemeLabel = isBright ? 'Dark Mode' : 'Bright Mode';
+    const nextThemeLabel = isBright ? 'מצב כהה' : 'מצב בהיר';
     const nextThemeIcon = isBright ? '🌙' : '☀️';
-    const sidebarText = isBright ? 'Switch to Dark' : 'Switch to Bright';
+    const sidebarText = isBright ? 'מעבר למצב כהה' : 'מעבר למצב בהיר';
 
     const headerIcon = document.getElementById('themeToggleIcon');
     const headerLabel = document.getElementById('themeToggleLabel');
@@ -231,13 +240,13 @@
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('devpulse_theme', theme);
     updateThemeUI(theme);
-    renderChart(); // redraw chart with theme-aware colors
+    renderChart();
   }
 
   function toggleTheme() {
     const newTheme = STATE.theme === 'dark' ? 'light' : 'dark';
     applyTheme(newTheme);
-    showToast(newTheme === 'light' ? '☀️ Switched to Bright mode' : '🌙 Switched to Dark mode', 'info');
+    showToast(newTheme === 'light' ? '☀️ הוחלף למצב בהיר' : '🌙 הוחלף למצב כהה', 'info');
   }
 
   if (DOM.themeToggle) {
@@ -250,31 +259,30 @@
   }
 
   /* ========================================================
-     Live Clock
+     שעון חי
      ======================================================== */
   function updateLiveClock() {
     const now = new Date();
-    DOM.liveClock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    DOM.liveClock.textContent = now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   }
   setInterval(updateLiveClock, 1000);
   updateLiveClock();
 
   /* ========================================================
-     Sidebar & Navigation
+     ניווט ומעבר בין לשוניות
      ======================================================== */
   const tabDescriptions = {
-    dashboard: { title: 'Dashboard', sub: 'System overview and productivity metrics' },
-    kanban: { title: 'Task Board', sub: 'Manage, organize, and prioritize your sprints' },
-    pomodoro: { title: 'Focus Timer', sub: 'Pomodoro timer with sound notification' },
-    tools: { title: 'Dev Toolbox', sub: 'Formatters, validators, generators, and converters' },
-    projects: { title: 'Project Showcase', sub: 'Featured demo applications and utilities' }
+    dashboard: { title: 'לוח בקרה', sub: 'סקירת מערכת ומדדי פרודוקטיביות' },
+    kanban: { title: 'לוח משימות', sub: 'ניהול, ארגון ותעדוף ספרינטים' },
+    pomodoro: { title: 'טיימר ריכוז', sub: 'טיימר פומודורו עם צליל התראה מובנה' },
+    tools: { title: 'ארגז כלים למפתחים', sub: 'מעצבים, מאמתים, מחוללים וממירי נתונים' },
+    projects: { title: 'גלריית פרויקטים', sub: 'פרויקטים נבחרים, כלים ואבות-טיפוס' }
   };
 
   DOM.navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
       switchTab(targetTab);
-      // Close mobile sidebar if open
       if (DOM.sidebar.classList.contains('open')) {
         DOM.sidebar.classList.remove('open');
       }
@@ -304,7 +312,7 @@
   }
 
   /* ========================================================
-     Quotes Generator
+     מחולל ציטוטי השראה
      ======================================================== */
   function setRandomQuote() {
     const quote = STATE.quotes[Math.floor(Math.random() * STATE.quotes.length)];
@@ -317,13 +325,19 @@
   });
 
   /* ========================================================
-     Kanban Task Board & State Management
+     לוח משימות קנבן
      ======================================================== */
   function saveTasks() {
-    localStorage.setItem('devpulse_tasks', JSON.stringify(STATE.tasks));
+    localStorage.setItem('devpulse_tasks_v2', JSON.stringify(STATE.tasks));
     renderTasks();
     updateDashboardStats();
   }
+
+  const priorityLabels = {
+    high: 'גבוהה 🔥',
+    medium: 'בינונית',
+    low: 'נמוכה'
+  };
 
   function renderTasks() {
     const searchTerm = DOM.taskSearchInput.value.toLowerCase().trim();
@@ -355,27 +369,26 @@
       card.setAttribute('draggable', 'true');
       card.setAttribute('data-id', task.id);
 
+      // ב-RTL קידום הוא שמאלה (←) והחזרה היא ימינה (→)
       card.innerHTML = `
         <div class="task-card-header">
           <div class="task-card-title">${escapeHtml(task.title)}</div>
         </div>
         ${task.desc ? `<div class="task-card-desc">${escapeHtml(task.desc)}</div>` : ''}
         <div class="task-card-footer">
-          <span class="task-tag">${escapeHtml(task.tag || 'General')}</span>
-          <span class="task-priority-badge ${task.priority}">${task.priority}</span>
+          <span class="task-tag">${escapeHtml(task.tag || 'כללי')}</span>
+          <span class="task-priority-badge ${task.priority}">${priorityLabels[task.priority] || task.priority}</span>
         </div>
         <div class="task-actions">
-          ${task.status !== 'todo' ? `<button class="task-action-btn" data-action="prev" title="Move back">← Move</button>` : ''}
-          ${task.status !== 'done' ? `<button class="task-action-btn" data-action="next" title="Advance">Advance →</button>` : ''}
-          <button class="task-action-btn" data-action="delete" style="margin-left: auto; color: var(--status-red);">Delete</button>
+          ${task.status !== 'done' ? `<button class="task-action-btn" data-action="next" title="קדם שלב">קדם ←</button>` : ''}
+          ${task.status !== 'todo' ? `<button class="task-action-btn" data-action="prev" title="החזר שלב">→ החזר</button>` : ''}
+          <button class="task-action-btn" data-action="delete" style="color: var(--status-red);">מחק</button>
         </div>
       `;
 
-      // Drag and drop listeners
       card.addEventListener('dragstart', handleDragStart);
       card.addEventListener('dragend', handleDragEnd);
 
-      // Action buttons
       card.querySelectorAll('.task-action-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -405,7 +418,7 @@
     if (task.status === 'todo') task.status = 'in-progress';
     else if (task.status === 'in-progress') task.status = 'done';
     saveTasks();
-    showToast(`Task moved to ${task.status}`);
+    showToast('המשימה קודמה לשלב הבא');
   }
 
   function regressTask(id) {
@@ -414,16 +427,16 @@
     if (task.status === 'done') task.status = 'in-progress';
     else if (task.status === 'in-progress') task.status = 'todo';
     saveTasks();
-    showToast(`Task moved back`);
+    showToast('המשימה הוחזרה לשלב הקודם');
   }
 
   function deleteTask(id) {
     STATE.tasks = STATE.tasks.filter(t => t.id !== id);
     saveTasks();
-    showToast('Task removed');
+    showToast('המשימה נמחקה בהצלחה');
   }
 
-  // Drag & Drop
+  // גרירה ושחרור (Drag & Drop)
   let draggedTaskId = null;
 
   function handleDragStart(e) {
@@ -456,7 +469,7 @@
         if (task && task.status !== newStatus) {
           task.status = newStatus;
           saveTasks();
-          showToast(`Task moved to ${newStatus}`);
+          showToast(`המשימה הועברה בהצלחה`);
         }
       }
     });
@@ -465,9 +478,9 @@
   DOM.taskSearchInput.addEventListener('input', renderTasks);
   DOM.priorityFilter.addEventListener('change', renderTasks);
 
-  // Modal open/close
+  // מודאל הוספת משימה
   DOM.openAddTaskModalBtn.addEventListener('click', () => {
-    DOM.modalTitle.textContent = 'Add New Task';
+    DOM.modalTitle.textContent = 'יצירת משימה חדשה';
     DOM.taskForm.reset();
     DOM.taskId.value = '';
     DOM.taskModal.classList.add('open');
@@ -494,18 +507,18 @@
       title: title,
       desc: DOM.taskDescInput.value.trim(),
       priority: DOM.taskPriorityInput.value,
-      tag: DOM.taskCategoryInput.value.trim() || 'General',
+      tag: DOM.taskCategoryInput.value.trim() || 'כללי',
       status: 'todo'
     };
 
     STATE.tasks.unshift(newTask);
     saveTasks();
     closeModal();
-    showToast('Task added successfully', 'success');
+    showToast('המשימה נוספה בהצלחה', 'success');
   });
 
   /* ========================================================
-     Pomodoro Focus Timer
+     טיימר ריכוז (פומודורו)
      ======================================================== */
   const circumference = 2 * Math.PI * 110;
   DOM.timerProgressFill.style.strokeDasharray = `${circumference} ${circumference}`;
@@ -534,7 +547,7 @@
     STATE.timer.timeLeft = STATE.timer.durations[mode];
     stopTimer();
     DOM.timerModes.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-mode') === mode));
-    DOM.timerLabel.textContent = mode === 'pomodoro' ? 'Stay focused' : 'Take a breather';
+    DOM.timerLabel.textContent = mode === 'pomodoro' ? 'הישאר ממוקד' : 'קח הפסקה קצרה למנוחה';
     updateTimerDisplay();
   }
 
@@ -547,7 +560,7 @@
   function startTimer() {
     if (STATE.timer.isRunning) return;
     STATE.timer.isRunning = true;
-    DOM.toggleTimerBtn.textContent = 'Pause';
+    DOM.toggleTimerBtn.textContent = 'השהה';
     DOM.toggleTimerBtn.classList.replace('btn-primary', 'btn-secondary');
 
     STATE.timer.intervalId = setInterval(() => {
@@ -563,9 +576,9 @@
   function stopTimer() {
     STATE.timer.isRunning = false;
     clearInterval(STATE.timer.intervalId);
-    DOM.toggleTimerBtn.textContent = 'Start Focus';
+    DOM.toggleTimerBtn.textContent = 'הפעל ריכוז';
     DOM.toggleTimerBtn.classList.replace('btn-secondary', 'btn-primary');
-    document.title = 'DevPulse — Modern Developer Hub';
+    document.title = 'DevPulse — מרכז הפיתוח והפרודוקטיביות';
   }
 
   function timerFinished() {
@@ -576,10 +589,10 @@
       STATE.timer.sessionsCompleted++;
       localStorage.setItem('devpulse_pomodoro_count', STATE.timer.sessionsCompleted);
       updateDashboardStats();
-      showToast('🎉 Focus session completed! Great work.', 'success');
+      showToast('🎉 סבב ריכוז הסתיים בהצלחה! עבודה מצוינת.', 'success');
       switchTimerMode('shortBreak');
     } else {
-      showToast('Break finished! Ready to focus?', 'info');
+      showToast('ההפסקה הסתיימה! מוכנים לסבב ריכוז חדש?', 'info');
       switchTimerMode('pomodoro');
     }
 
@@ -600,7 +613,7 @@
     stopTimer();
     STATE.timer.timeLeft = STATE.timer.durations[STATE.timer.mode];
     updateTimerDisplay();
-    showToast('Timer reset');
+    showToast('הטיימר אופס');
   });
 
   DOM.skipTimerBtn.addEventListener('click', () => {
@@ -612,12 +625,12 @@
     }
   });
 
-  // Pleasant Web Audio Chime (Zero external mp3 needed!)
+  // צליל מלודי נעים (Web Audio API - פועל בכל דפדפן ללא צורך בקובץ אודיו חיצוני)
   function playChime() {
     if (!DOM.soundToggle.checked) return;
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 chord
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
       notes.forEach((freq, idx) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -632,12 +645,12 @@
         osc.stop(audioCtx.currentTime + idx * 0.12 + 0.65);
       });
     } catch (e) {
-      console.warn('Audio playback error', e);
+      console.warn('שגיאת אודיו', e);
     }
   }
 
   /* ========================================================
-     Dashboard Metrics & Canvas Chart
+     מדדי לוח בקרה וגרף פעילות שבועי (HTML5 Canvas)
      ======================================================== */
   function updateDashboardStats() {
     const doneTasks = STATE.tasks.filter(t => t.status === 'done').length;
@@ -645,8 +658,8 @@
 
     const totalMinutes = STATE.timer.sessionsCompleted * 25;
     const hours = (totalMinutes / 60).toFixed(1);
-    DOM.statFocusTime.textContent = `${hours}h`;
-    DOM.statSessionsDone.textContent = `${STATE.timer.sessionsCompleted} completed pomodoros`;
+    DOM.statFocusTime.textContent = `${hours} שעות`;
+    DOM.statSessionsDone.textContent = `${STATE.timer.sessionsCompleted} סבבי פומודורו שהושלמו`;
   }
 
   function renderChart() {
@@ -661,21 +674,22 @@
     const isDark = STATE.theme === 'dark';
     const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
     const textColor = isDark ? '#8b949e' : '#656d76';
-    const accentColor = isDark ? '#58a6ff' : '#0969da';
+    const accentColor = isDark ? '#58a6ff' : '#2563eb';
     const gradientFill = ctx.createLinearGradient(0, 0, 0, height);
-    gradientFill.addColorStop(0, isDark ? 'rgba(88, 166, 255, 0.35)' : 'rgba(9, 105, 218, 0.25)');
+    gradientFill.addColorStop(0, isDark ? 'rgba(88, 166, 255, 0.35)' : 'rgba(37, 99, 235, 0.25)');
     gradientFill.addColorStop(1, 'rgba(88, 166, 255, 0.0)');
 
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const data = [2.5, 4.0, 3.2, 5.5, 4.8, 6.2, 3.8]; // Focus hours
+    // ימי השבוע בעברית (מימין לשמאל: א' עד שבת)
+    const days = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'];
+    const data = [3.8, 6.2, 4.8, 5.5, 3.2, 4.0, 2.5]; // שעות ריכוז
 
     ctx.clearRect(0, 0, width, height);
 
-    // Draw horizontal grid lines
-    const padding = { top: 20, bottom: 40, left: 40, right: 20 };
+    const padding = { top: 20, bottom: 40, left: 30, right: 40 };
     const chartWidth = width - padding.left - padding.right;
     const chartHeight = height - padding.top - padding.bottom;
 
+    // קווי רשת אופקיים
     ctx.strokeStyle = gridColor;
     ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
@@ -685,21 +699,23 @@
       ctx.lineTo(width - padding.right, y);
       ctx.stroke();
 
-      const val = (8 - i * 2) + 'h';
+      const val = (8 - i * 2) + ' שע׳';
       ctx.fillStyle = textColor;
-      ctx.font = '11px monospace';
-      ctx.fillText(val, 8, y + 4);
+      ctx.font = '11px Rubik, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(val, width - 6, y + 4);
     }
 
-    // Calculate points
+    // חישוב נקודות
     const maxVal = 8;
     const points = data.map((val, idx) => {
-      const x = padding.left + (chartWidth / (data.length - 1)) * idx;
+      // ב-RTL הנקודות זורמות מימין לשמאל
+      const x = (width - padding.right) - (chartWidth / (data.length - 1)) * idx;
       const y = padding.top + chartHeight - (val / maxVal) * chartHeight;
       return { x, y, val };
     });
 
-    // Draw gradient area
+    // מילוי שטח הגרף
     ctx.beginPath();
     ctx.moveTo(points[0].x, padding.top + chartHeight);
     points.forEach((pt, idx) => {
@@ -715,7 +731,7 @@
     ctx.fillStyle = gradientFill;
     ctx.fill();
 
-    // Draw stroke line
+    // ציור קו הגרף
     ctx.beginPath();
     points.forEach((pt, idx) => {
       if (idx === 0) ctx.moveTo(pt.x, pt.y);
@@ -729,22 +745,19 @@
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // Draw dots and day labels
+    // נקודות ותוויות ימים
     points.forEach((pt, idx) => {
-      // Circle
       ctx.fillStyle = accentColor;
       ctx.beginPath();
       ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer ring
       ctx.strokeStyle = isDark ? '#161b22' : '#ffffff';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Day text
       ctx.fillStyle = textColor;
-      ctx.font = '12px sans-serif';
+      ctx.font = '12px Rubik, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(days[idx], pt.x, height - 14);
     });
@@ -755,25 +768,25 @@
   });
 
   /* ========================================================
-     Developer Toolbox
+     ארגז כלים למפתחים
      ======================================================== */
-  // JSON Formatter
+  // מעצב ומאמת JSON
   DOM.formatJsonBtn.addEventListener('click', () => {
     try {
       const val = DOM.jsonInput.value.trim();
       if (!val) {
         DOM.jsonFeedback.className = 'tool-feedback';
-        DOM.jsonFeedback.textContent = 'Status: Please enter some JSON first.';
+        DOM.jsonFeedback.textContent = 'סטטוס: נא להזין מחרוזת JSON תחילה.';
         return;
       }
       const parsed = JSON.parse(val);
       DOM.jsonInput.value = JSON.stringify(parsed, null, 2);
       DOM.jsonFeedback.className = 'tool-feedback success';
-      DOM.jsonFeedback.textContent = 'Status: Valid JSON formatted successfully!';
-      showToast('JSON beautified', 'success');
+      DOM.jsonFeedback.textContent = 'סטטוס: ה-JSON תקין ועוצב בהצלחה!';
+      showToast('ה-JSON עוצב בהצלחה', 'success');
     } catch (err) {
       DOM.jsonFeedback.className = 'tool-feedback error';
-      DOM.jsonFeedback.textContent = `Error: ${err.message}`;
+      DOM.jsonFeedback.textContent = `שגיאת תחביר: ${err.message}`;
     }
   });
 
@@ -782,10 +795,11 @@
       const parsed = JSON.parse(DOM.jsonInput.value);
       DOM.jsonInput.value = JSON.stringify(parsed);
       DOM.jsonFeedback.className = 'tool-feedback success';
-      DOM.jsonFeedback.textContent = 'Status: Valid JSON minified!';
+      DOM.jsonFeedback.textContent = 'סטטוס: ה-JSON נדחס בהצלחה!';
+      showToast('ה-JSON נדחס');
     } catch (err) {
       DOM.jsonFeedback.className = 'tool-feedback error';
-      DOM.jsonFeedback.textContent = `Error: ${err.message}`;
+      DOM.jsonFeedback.textContent = `שגיאה: ${err.message}`;
     }
   });
 
@@ -793,16 +807,17 @@
     const sample = {
       app: "DevPulse",
       version: "1.0.0",
-      deployed_on: "GitHub Pages",
-      features: ["Kanban", "Pomodoro", "Toolbox"],
-      config: {
-        theme: "dark",
-        offline_ready: true
+      language: "hebrew",
+      rtl_enabled: true,
+      features: ["לוח משימות", "טיימר פומודורו", "ארגז כלים למפתחים"],
+      settings: {
+        theme: STATE.theme,
+        sound: true
       }
     };
     DOM.jsonInput.value = JSON.stringify(sample, null, 2);
     DOM.jsonFeedback.className = 'tool-feedback success';
-    DOM.jsonFeedback.textContent = 'Status: Sample JSON loaded.';
+    DOM.jsonFeedback.textContent = 'סטטוס: נתוני JSON לדוגמה נטענו.';
   });
 
   // Base64
@@ -812,11 +827,11 @@
       const encoded = btoa(unescape(encodeURIComponent(str)));
       DOM.base64Input.value = encoded;
       DOM.base64Feedback.className = 'tool-feedback success';
-      DOM.base64Feedback.textContent = 'Status: Encoded to Base64.';
-      showToast('Encoded to Base64');
+      DOM.base64Feedback.textContent = 'סטטוס: הטקסט קודד בהצלחה ל-Base64.';
+      showToast('קודד בהצלחה ל-Base64');
     } catch (e) {
       DOM.base64Feedback.className = 'tool-feedback error';
-      DOM.base64Feedback.textContent = `Error: ${e.message}`;
+      DOM.base64Feedback.textContent = `שגיאה: ${e.message}`;
     }
   });
 
@@ -826,21 +841,21 @@
       const decoded = decodeURIComponent(escape(atob(str)));
       DOM.base64Input.value = decoded;
       DOM.base64Feedback.className = 'tool-feedback success';
-      DOM.base64Feedback.textContent = 'Status: Decoded from Base64.';
-      showToast('Decoded from Base64');
+      DOM.base64Feedback.textContent = 'סטטוס: המחרוזת פוענחה בהצלחה מ-Base64.';
+      showToast('פוענח בהצלחה מ-Base64');
     } catch (e) {
       DOM.base64Feedback.className = 'tool-feedback error';
-      DOM.base64Feedback.textContent = `Error: Invalid Base64 string (${e.message})`;
+      DOM.base64Feedback.textContent = `שגיאה: מחרוזת Base64 אינה תקינה (${e.message})`;
     }
   });
 
   DOM.clearBase64Btn.addEventListener('click', () => {
     DOM.base64Input.value = '';
     DOM.base64Feedback.className = 'tool-feedback';
-    DOM.base64Feedback.textContent = 'Status: Cleared.';
+    DOM.base64Feedback.textContent = 'סטטוס: השדה נוקה.';
   });
 
-  // UUID Generator
+  // מחולל UUID v4
   function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       const r = (Math.random() * 16) | 0;
@@ -856,8 +871,8 @@
       const item = document.createElement('div');
       item.className = 'uuid-item';
       item.innerHTML = `
-        <span>${uuid}</span>
-        <button class="btn btn-small btn-secondary copy-uuid-btn" data-uuid="${uuid}">Copy</button>
+        <span dir="ltr">${uuid}</span>
+        <button class="btn btn-small btn-secondary copy-uuid-btn" data-uuid="${uuid}">העתק</button>
       `;
       DOM.uuidList.appendChild(item);
     }
@@ -866,9 +881,9 @@
       btn.addEventListener('click', () => {
         const text = btn.getAttribute('data-uuid');
         navigator.clipboard.writeText(text).then(() => {
-          btn.textContent = 'Copied!';
-          setTimeout(() => btn.textContent = 'Copy', 1500);
-          showToast('UUID copied to clipboard');
+          btn.textContent = 'הועתק!';
+          setTimeout(() => btn.textContent = 'העתק', 1500);
+          showToast('מזהה ה-UUID הועתק ללוח');
         });
       });
     });
@@ -876,12 +891,13 @@
 
   DOM.generateUuidBtn.addEventListener('click', renderUuids);
 
-  // URL Encoder / Decoder
+  // מקודד ומפענח URL
   DOM.urlEncodeBtn.addEventListener('click', () => {
     const val = DOM.urlInput.value;
     DOM.urlInput.value = encodeURIComponent(val);
     DOM.urlFeedback.className = 'tool-feedback success';
-    DOM.urlFeedback.textContent = 'Status: URL encoded.';
+    DOM.urlFeedback.textContent = 'סטטוס: הכתובת קודדה בהצלחה.';
+    showToast('הכתובת קודדה');
   });
 
   DOM.urlDecodeBtn.addEventListener('click', () => {
@@ -889,16 +905,23 @@
       const val = DOM.urlInput.value;
       DOM.urlInput.value = decodeURIComponent(val);
       DOM.urlFeedback.className = 'tool-feedback success';
-      DOM.urlFeedback.textContent = 'Status: URL decoded.';
+      DOM.urlFeedback.textContent = 'סטטוס: הכתובת פוענחה בהצלחה.';
+      showToast('הכתובת פוענחה');
     } catch (e) {
       DOM.urlFeedback.className = 'tool-feedback error';
-      DOM.urlFeedback.textContent = `Error: ${e.message}`;
+      DOM.urlFeedback.textContent = `שגיאה: ${e.message}`;
     }
   });
 
   /* ========================================================
-     Projects Showcase
+     גלריית פרויקטים
      ======================================================== */
+  const categoryLabels = {
+    web: 'אפליקציית רשת',
+    tool: 'כלי פיתוח',
+    demo: 'דמו'
+  };
+
   function renderProjects(filter = 'all') {
     DOM.projectsGrid.innerHTML = '';
     const filtered = STATE.projects.filter(p => filter === 'all' || p.type === filter);
@@ -909,15 +932,15 @@
       card.innerHTML = `
         <div style="display: flex; align-items: center; margin-bottom: 8px;">
           <div class="project-icon">${p.icon}</div>
-          <span class="project-badge ${p.type}">${p.type.toUpperCase()}</span>
+          <span class="project-badge ${p.type}">${categoryLabels[p.type] || p.type}</span>
         </div>
         <h4 class="project-title">${escapeHtml(p.title)}</h4>
         <p class="project-desc">${escapeHtml(p.desc)}</p>
         <div class="project-tech">
           ${p.tech.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}
         </div>
-        <button class="btn btn-secondary btn-small" style="margin-top: auto;" onclick="alert('Viewing demo for: ${p.title}')">
-          View Demo →
+        <button class="btn btn-secondary btn-small" style="margin-top: auto;" onclick="alert('תצוגת דמו עבור: ${p.title}')">
+          צפה בדמו ←
         </button>
       `;
       DOM.projectsGrid.appendChild(card);
@@ -933,7 +956,7 @@
   });
 
   /* ========================================================
-     Utility Helpers
+     פונקציות עזר
      ======================================================== */
   function escapeHtml(str) {
     if (!str) return '';
@@ -945,7 +968,7 @@
   }
 
   /* ========================================================
-     Initial App Boot
+     אתחול האפליקציה (Init)
      ======================================================== */
   function init() {
     applyTheme(STATE.theme);
@@ -958,7 +981,6 @@
     setTimeout(renderChart, 100);
   }
 
-  // Run on load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
