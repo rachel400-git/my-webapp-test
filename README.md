@@ -21,10 +21,8 @@ A responsive, feature-rich developer workspace and productivity webapp built wit
 
 ## 🚀 Live Demo on GitHub Pages
 
-Once deployed, your live site will be accessible at:
-```
-https://<your-username>.github.io/<your-repo-name>/
-```
+The live site is deployed and accessible at:
+👉 **[https://rachel400-git.github.io/my-webapp-test/](https://rachel400-git.github.io/my-webapp-test/)**
 
 ---
 
