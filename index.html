@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevPulse - Modern Developer Dashboard, Kanban Board, Focus Timer, and Utility Playground">
+  <title>DevPulse — Modern Developer Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%22><text y=%2226%22 font-size=%2224%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar / Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <span class="brand-title">DevPulse</span>
+          <span class="brand-badge">v1.0</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="kanban">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4v16H4zm6 0h4v10h-4zm6 0h4v6h-4z"/></svg>
+          <span>Task Board</span>
+          <span class="nav-counter" id="totalTasksCount">0</span>
+        </button>
+        <button class="nav-item" data-tab="pomodoro">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Focus Timer</span>
+        </button>
+        <button class="nav-item" data-tab="tools">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span>Dev Toolbox</span>
+        </button>
+        <button class="nav-item" data-tab="projects">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <span>Projects</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-pill">
+          <div class="avatar">👨‍💻</div>
+          <div class="user-info">
+            <span class="user-name">Guest Developer</span>
+            <span class="user-role">Online · Local Storage</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Region -->
+    <div class="main-wrapper">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="current-page-info">
+            <h1 class="page-heading" id="pageHeading">Dashboard</h1>
+            <p class="page-subheading" id="pageSubheading">System overview and productivity metrics</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="live-clock" id="liveClock">00:00:00 PM</div>
+          <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme (Dark / Light)">
+            <span class="theme-icon-light">☀️</span>
+            <span class="theme-icon-dark">🌙</span>
+          </button>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary gh-btn" id="repoLinkBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Content Views -->
+      <main class="content-container">
+        <!-- TAB 1: DASHBOARD -->
+        <section class="tab-pane active" id="tab-dashboard">
+          <!-- Stat Grid -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Completed Tasks</span>
+                <span class="metric-badge green">+12%</span>
+              </div>
+              <div class="metric-value" id="statCompletedTasks">0</div>
+              <div class="metric-footer">Across all Kanban columns</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Focus Time</span>
+                <span class="metric-badge purple">Today</span>
+              </div>
+              <div class="metric-value" id="statFocusTime">0m</div>
+              <div class="metric-footer" id="statSessionsDone">0 completed pomodoros</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Productivity Streak</span>
+                <span class="metric-badge orange">Active 🔥</span>
+              </div>
+              <div class="metric-value" id="statStreak">5 Days</div>
+              <div class="metric-footer">Personal best: 14 days</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Status</span>
+                <span class="metric-badge blue">GitHub Pages</span>
+              </div>
+              <div class="metric-value">Live 🚀</div>
+              <div class="metric-footer">Static client-side app</div>
+            </div>
+          </div>
+
+          <!-- Chart & Quick Feed -->
+          <div class="dashboard-grid">
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Weekly Focus & Activity</h3>
+                  <p class="card-subtitle">Hours spent in focus sessions this week</p>
+                </div>
+                <div class="chart-legend">
+                  <span class="legend-dot focus"></span> Focus Hours
+                </div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="productivityChart" height="220"></canvas>
+              </div>
+            </div>
+
+            <div class="card quote-card">
+              <div class="card-header">
+                <h3 class="card-title">Daily Inspiration</h3>
+                <button class="icon-btn-small" id="newQuoteBtn" title="Get another quote">🔄</button>
+              </div>
+              <div class="quote-content">
+                <blockquote id="quoteText">"First, solve the problem. Then, write the code."</blockquote>
+                <cite id="quoteAuthor">— John Johnson</cite>
+              </div>
+              <div class="quote-tags">
+                <span class="tag">#programming</span>
+                <span class="tag">#clean-code</span>
+                <span class="tag">#focus</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: KANBAN BOARD -->
+        <section class="tab-pane" id="tab-kanban">
+          <div class="kanban-toolbar">
+            <div class="toolbar-left">
+              <input type="text" id="taskSearchInput" class="form-input search-input" placeholder="Search tasks...">
+              <select id="priorityFilter" class="form-select">
+                <option value="all">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="openAddTaskModalBtn">
+              <span>+ Add New Task</span>
+            </button>
+          </div>
+
+          <div class="kanban-board">
+            <!-- Todo Column -->
+            <div class="kanban-column" data-column="todo">
+              <div class="column-header">
+                <div class="column-title">
+                  <span class="status-indicator todo"></span>
+                  <span>To Do</span>
+                  <span class="column-badge" id="todoCount">0</span>
+                </div>
+              </div>
+              <div class="task-list" id="todoList" data-status="todo"></div>
+            </div>
+
+            <!-- In Progress Column -->
+            <div class="kanban-column" data-column="in-progress">
+              <div class="column-header">
+                <div class="column-title">
+                  <span class="status-indicator in-progress"></span>
+                  <span>In Progress</span>
+                  <span class="column-badge" id="inProgressCount">0</span>
+                </div>
+              </div>
+              <div class="task-list" id="inProgressList" data-status="in-progress"></div>
+            </div>
+
+            <!-- Done Column -->
+            <div class="kanban-column" data-column="done">
+              <div class="column-header">
+                <div class="column-title">
+                  <span class="status-indicator done"></span>
+                  <span>Done</span>
+                  <span class="column-badge" id="doneCount">0</span>
+                </div>
+              </div>
+              <div class="task-list" id="doneList" data-status="done"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: POMODORO TIMER -->
+        <section class="tab-pane" id="tab-pomodoro">
+          <div class="timer-container">
+            <div class="timer-modes">
+              <button class="timer-mode-btn active" data-mode="pomodoro" data-time="25">Focus (25m)</button>
+              <button class="timer-mode-btn" data-mode="shortBreak" data-time="5">Short Break (5m)</button>
+              <button class="timer-mode-btn" data-mode="longBreak" data-time="15">Long Break (15m)</button>
+            </div>
+
+            <div class="timer-display-wrapper">
+              <svg class="progress-ring" viewBox="0 0 260 260">
+                <circle class="progress-ring-track" cx="130" cy="130" r="110"/>
+                <circle class="progress-ring-fill" id="timerProgressFill" cx="130" cy="130" r="110"/>
+              </svg>
+              <div class="timer-center-info">
+                <span class="timer-countdown" id="timerCountdown">25:00</span>
+                <span class="timer-label" id="timerLabel">Stay focused</span>
+              </div>
+            </div>
+
+            <div class="timer-controls">
+              <button class="btn btn-secondary timer-btn" id="resetTimerBtn">Reset</button>
+              <button class="btn btn-primary timer-btn-large" id="toggleTimerBtn">Start Focus</button>
+              <button class="btn btn-secondary timer-btn" id="skipTimerBtn">Skip</button>
+            </div>
+
+            <div class="timer-settings-card">
+              <h4>Audio & Sound Settings</h4>
+              <div class="settings-row">
+                <span>Sound Chime Alert</span>
+                <label class="switch">
+                  <input type="checkbox" id="soundToggle" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="settings-row">
+                <span>Auto-start Next Session</span>
+                <label class="switch">
+                  <input type="checkbox" id="autoStartToggle">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: DEVELOPER TOOLBOX -->
+        <section class="tab-pane" id="tab-tools">
+          <div class="tools-grid">
+            <!-- Tool 1: JSON Formatter & Validator -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">JSON Formatter & Validator</h3>
+                  <p class="card-subtitle">Format, beautify, minify, and validate JSON data</p>
+                </div>
+                <div class="tool-actions">
+                  <button class="btn btn-small btn-secondary" id="formatJsonBtn">Beautify</button>
+                  <button class="btn btn-small btn-secondary" id="minifyJsonBtn">Minify</button>
+                  <button class="btn btn-small btn-secondary" id="sampleJsonBtn">Sample</button>
+                </div>
+              </div>
+              <div class="tool-body">
+                <textarea id="jsonInput" class="code-area" placeholder="Paste or type JSON here..."></textarea>
+                <div class="tool-feedback" id="jsonFeedback">Status: Ready</div>
+              </div>
+            </div>
+
+            <!-- Tool 2: Base64 Encoder / Decoder -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Base64 Encoder / Decoder</h3>
+                  <p class="card-subtitle">Convert strings to Base64 and back</p>
+                </div>
+                <div class="tool-actions">
+                  <button class="btn btn-small btn-secondary" id="encodeBase64Btn">Encode</button>
+                  <button class="btn btn-small btn-secondary" id="decodeBase64Btn">Decode</button>
+                  <button class="btn btn-small btn-secondary" id="clearBase64Btn">Clear</button>
+                </div>
+              </div>
+              <div class="tool-body">
+                <textarea id="base64Input" class="code-area" placeholder="Enter text to encode or Base64 to decode..."></textarea>
+                <div class="tool-feedback" id="base64Feedback">Status: Ready</div>
+              </div>
+            </div>
+
+            <!-- Tool 3: UUID & String Utilities -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">UUID v4 & Hash Generator</h3>
+                  <p class="card-subtitle">Generate secure random UUIDs and hashes</p>
+                </div>
+                <div class="tool-actions">
+                  <button class="btn btn-small btn-primary" id="generateUuidBtn">Generate UUIDs</button>
+                </div>
+              </div>
+              <div class="tool-body">
+                <div class="generated-list" id="uuidList"></div>
+              </div>
+            </div>
+
+            <!-- Tool 4: URL Encoder / Decoder -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">URL Encoder / Decoder</h3>
+                  <p class="card-subtitle">Safely encode URI components and parse queries</p>
+                </div>
+                <div class="tool-actions">
+                  <button class="btn btn-small btn-secondary" id="urlEncodeBtn">Encode</button>
+                  <button class="btn btn-small btn-secondary" id="urlDecodeBtn">Decode</button>
+                </div>
+              </div>
+              <div class="tool-body">
+                <textarea id="urlInput" class="code-area" placeholder="Enter URL or URI component..."></textarea>
+                <div class="tool-feedback" id="urlFeedback">Status: Ready</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: PROJECTS SHOWCASE -->
+        <section class="tab-pane" id="tab-projects">
+          <div class="projects-intro">
+            <div>
+              <h3>Featured Projects</h3>
+              <p>Showcase of web applications, tools, and prototypes</p>
+            </div>
+            <div class="filter-pills" id="projectFilterPills">
+              <button class="filter-pill active" data-filter="all">All</button>
+              <button class="filter-pill" data-filter="web">Web Apps</button>
+              <button class="filter-pill" data-filter="tool">Dev Tools</button>
+              <button class="filter-pill" data-filter="demo">Demos</button>
+            </div>
+          </div>
+
+          <div class="projects-grid" id="projectsGrid"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Task Modal -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Create New Task</h3>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <form id="taskForm">
+        <input type="hidden" id="taskId">
+        <div class="form-group">
+          <label for="taskTitleInput">Task Title *</label>
+          <input type="text" id="taskTitleInput" class="form-input" placeholder="e.g. Deploy site to GitHub Pages" required>
+        </div>
+        <div class="form-group">
+          <label for="taskDescInput">Description</label>
+          <textarea id="taskDescInput" class="form-input" rows="3" placeholder="Brief details about what needs to be done..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taskPriorityInput">Priority</label>
+            <select id="taskPriorityInput" class="form-select">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High 🔥</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="taskCategoryInput">Category / Tag</label>
+            <input type="text" id="taskCategoryInput" class="form-input" placeholder="e.g. DevOps, UI, Feature">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
