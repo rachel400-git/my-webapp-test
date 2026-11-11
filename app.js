@@ -209,18 +209,45 @@
   /* ========================================================
      Theme System
      ======================================================== */
+  function updateThemeUI(theme) {
+    const isBright = theme === 'light';
+    const nextThemeLabel = isBright ? 'Dark Mode' : 'Bright Mode';
+    const nextThemeIcon = isBright ? '🌙' : '☀️';
+    const sidebarText = isBright ? 'Switch to Dark' : 'Switch to Bright';
+
+    const headerIcon = document.getElementById('themeToggleIcon');
+    const headerLabel = document.getElementById('themeToggleLabel');
+    if (headerIcon) headerIcon.textContent = nextThemeIcon;
+    if (headerLabel) headerLabel.textContent = nextThemeLabel;
+
+    const sidebarIcon = document.getElementById('sidebarThemeIcon');
+    const sidebarLabel = document.getElementById('sidebarThemeText');
+    if (sidebarIcon) sidebarIcon.textContent = nextThemeIcon;
+    if (sidebarLabel) sidebarLabel.textContent = sidebarText;
+  }
+
   function applyTheme(theme) {
     STATE.theme = theme;
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('devpulse_theme', theme);
+    updateThemeUI(theme);
     renderChart(); // redraw chart with theme-aware colors
   }
 
-  DOM.themeToggle.addEventListener('click', () => {
+  function toggleTheme() {
     const newTheme = STATE.theme === 'dark' ? 'light' : 'dark';
     applyTheme(newTheme);
-    showToast(`Switched to ${newTheme} mode`);
-  });
+    showToast(newTheme === 'light' ? '☀️ Switched to Bright mode' : '🌙 Switched to Dark mode', 'info');
+  }
+
+  if (DOM.themeToggle) {
+    DOM.themeToggle.addEventListener('click', toggleTheme);
+  }
+
+  const sidebarThemeBtn = document.getElementById('sidebarThemeToggle');
+  if (sidebarThemeBtn) {
+    sidebarThemeBtn.addEventListener('click', toggleTheme);
+  }
 
   /* ========================================================
      Live Clock
